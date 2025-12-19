@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cpy4rqdrobds0"]
 
-[ext_resource type="Script" uid="uid://c8e6tdvtnietq" path="res://card.gd" id="1_kikvd"]
+[ext_resource type="Script" uid="uid://c8e6tdvtnietq" path="res://infra/scripts/card.gd" id="1_dsegt"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nxf5b"]
 border_width_left = 3
@@ -16,6 +16,7 @@ shadow_size = 2
 shadow_offset = Vector2(-0.205, 3.66)
 
 [node name="Card" type="Control"]
+custom_minimum_size = Vector2(120, 180)
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -28,7 +29,7 @@ offset_right = 60.0
 offset_bottom = 90.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_kikvd")
+script = ExtResource("1_dsegt")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
@@ -40,21 +41,35 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_nxf5b")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
+[node name="CardTitle" type="RichTextLabel" parent="."]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.08800001
 anchor_top = 0.062000003
-anchor_right = 0.707
-anchor_bottom = 0.15100001
-offset_left = -2.5600004
-offset_top = -2.1600008
-offset_right = 13.159996
-offset_bottom = 4.819998
+anchor_right = 0.82500005
+anchor_bottom = 0.155
+offset_top = -1.0799999
+offset_bottom = 5.180002
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 mouse_default_cursor_shape = 6
-text = "test card!!!"
+text = "loading"
+fit_content = true
+scroll_active = false
+
+[node name="CardBody" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.108
+anchor_top = 0.5
+anchor_right = 0.90000004
+anchor_bottom = 0.93200004
+offset_top = -0.99998474
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+mouse_default_cursor_shape = 6
+text = "loading"
 fit_content = true
 scroll_active = false

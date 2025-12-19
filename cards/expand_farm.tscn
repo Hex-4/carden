@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dto15avt8sjdh"]
+
+[ext_resource type="PackedScene" uid="uid://cpy4rqdrobds0" path="res://infra/card.tscn" id="1_6gi76"]
+
+[node name="Expand Farm" instance=ExtResource("1_6gi76")]
+title = "Expand Farm"
+body = "add a new slot to your farm"

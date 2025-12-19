@@ -3,6 +3,14 @@ extends Control
 var dragging = false
 var drag_offset = Vector2.ZERO
 
+@export var title = "Card Title"
+
+@export var body = "card body. 67 is so funny lmao"
+
+func _ready() -> void:
+	($CardTitle as RichTextLabel).text = title
+	($CardBody as RichTextLabel).text = body
+
 func _gui_input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:

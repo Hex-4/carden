@@ -1,0 +1,45 @@
+[gd_scene load_steps=4 format=3 uid="uid://btn12n75otxaf"]
+
+[ext_resource type="PackedScene" uid="uid://dsciygv667edo" path="res://cards/water.tscn" id="1_ygbwb"]
+[ext_resource type="PackedScene" uid="uid://dto15avt8sjdh" path="res://cards/expand_farm.tscn" id="2_ji3pq"]
+[ext_resource type="PackedScene" uid="uid://dqnvm6mr3aqc3" path="res://cards/parsnip_card.tscn" id="3_1kwsd"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.16800001
+anchor_top = 0.62200004
+anchor_right = 0.77000004
+anchor_bottom = 0.90000004
+offset_left = -0.53601074
+offset_top = -0.056030273
+offset_right = -0.040039063
+offset_bottom = -0.2000122
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="WaterCard" parent="HBoxContainer" instance=ExtResource("1_ygbwb")]
+layout_mode = 2
+
+[node name="WaterCard2" parent="HBoxContainer" instance=ExtResource("1_ygbwb")]
+layout_mode = 2
+
+[node name="Expand Farm" parent="HBoxContainer" instance=ExtResource("2_ji3pq")]
+layout_mode = 2
+
+[node name="Expand Farm2" parent="HBoxContainer" instance=ExtResource("2_ji3pq")]
+layout_mode = 2
+
+[node name="ParsnipCard" parent="HBoxContainer" instance=ExtResource("3_1kwsd")]
+layout_mode = 2
+
+[node name="ParsnipCard2" parent="HBoxContainer" instance=ExtResource("3_1kwsd")]
+layout_mode = 2
