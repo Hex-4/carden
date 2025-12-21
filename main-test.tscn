@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://btn12n75otxaf"]
+[gd_scene load_steps=5 format=3 uid="uid://btn12n75otxaf"]
 
 [ext_resource type="PackedScene" uid="uid://dsciygv667edo" path="res://cards/water.tscn" id="1_ygbwb"]
-[ext_resource type="PackedScene" uid="uid://dto15avt8sjdh" path="res://cards/expand_farm.tscn" id="2_ji3pq"]
 [ext_resource type="PackedScene" uid="uid://dqnvm6mr3aqc3" path="res://cards/parsnip_card.tscn" id="3_1kwsd"]
+[ext_resource type="Script" uid="uid://cfjx3gq8snege" path="res://infra/scripts/game_manager.gd" id="4_1kwsd"]
+[ext_resource type="Texture2D" uid="uid://bupe615yjnvp7" path="res://art-sources/farm.png" id="4_g7jtv"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -15,31 +16,39 @@ grow_vertical = 2
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.16800001
-anchor_top = 0.62200004
-anchor_right = 0.77000004
-anchor_bottom = 0.90000004
-offset_left = -0.53601074
-offset_top = -0.056030273
-offset_right = -0.040039063
-offset_bottom = -0.2000122
+anchor_left = 0.14374998
+anchor_top = 0.62193346
+anchor_right = 0.82232505
+anchor_bottom = 0.9670445
+offset_top = 0.051979065
+offset_right = -0.14401245
+offset_bottom = 0.08000183
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="WaterCard" parent="HBoxContainer" instance=ExtResource("1_ygbwb")]
-layout_mode = 2
-
-[node name="WaterCard2" parent="HBoxContainer" instance=ExtResource("1_ygbwb")]
-layout_mode = 2
-
-[node name="Expand Farm" parent="HBoxContainer" instance=ExtResource("2_ji3pq")]
-layout_mode = 2
-
-[node name="Expand Farm2" parent="HBoxContainer" instance=ExtResource("2_ji3pq")]
-layout_mode = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="ParsnipCard" parent="HBoxContainer" instance=ExtResource("3_1kwsd")]
 layout_mode = 2
 
-[node name="ParsnipCard2" parent="HBoxContainer" instance=ExtResource("3_1kwsd")]
+[node name="WaterCard" parent="HBoxContainer" instance=ExtResource("1_ygbwb")]
 layout_mode = 2
+
+[node name="GameManager" type="Node" parent="."]
+script = ExtResource("4_1kwsd")
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.171375
+anchor_top = 0.16939509
+anchor_right = 0.76505554
+anchor_bottom = 0.5309752
+offset_left = 0.57598877
+offset_top = 0.231987
+offset_right = -0.34399414
+offset_bottom = -0.07199097
+metadata/_edit_use_anchors_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(158, 59)
+texture = ExtResource("4_g7jtv")

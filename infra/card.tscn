@@ -3,32 +3,35 @@
 [ext_resource type="Script" uid="uid://c8e6tdvtnietq" path="res://infra/scripts/card.gd" id="1_dsegt"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nxf5b"]
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+corner_detail = 20
 shadow_color = Color(0, 0, 0, 0.19607843)
 shadow_size = 2
 shadow_offset = Vector2(-0.205, 3.66)
 
 [node name="Card" type="Control"]
-custom_minimum_size = Vector2(120, 180)
+custom_minimum_size = Vector2(40, 60)
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -60.0
-offset_top = -90.0
-offset_right = 60.0
-offset_bottom = 90.0
+offset_left = -20.0
+offset_top = -30.0
+offset_right = 20.0
+offset_bottom = 30.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 script = ExtResource("1_dsegt")
 
 [node name="Panel" type="Panel" parent="."]

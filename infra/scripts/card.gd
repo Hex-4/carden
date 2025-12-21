@@ -1,4 +1,5 @@
 extends Control
+class_name BaseCard
 
 var dragging = false
 var drag_offset = Vector2.ZERO
