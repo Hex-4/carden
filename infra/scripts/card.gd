@@ -4,24 +4,26 @@ class_name BaseCard
 var dragging = false
 var drag_offset = Vector2.ZERO
 
-var title = "loading"
-var body = "loading description..."
-var energy_cost = 2
+signal used_targetless
+var data: CardData
+@onready var gm: GameManager = get_owner()
 
-func setup():
-	($CardTitle as RichTextLabel).text = title
-	($CardBody as RichTextLabel).text = body
-	$TextureRect/EnergyCost.text = str(energy_cost)
+func setup(new_data: CardData):
+	data = new_data
+	($CardTitle as RichTextLabel).text = data.card_name
+	($CardBody as RichTextLabel).text = data.description
+	$TextureRect/EnergyCost.text = str(data.cost)
 	
 
 func _gui_input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if event.pressed:
-				dragging = true
-				drag_offset = get_global_mouse_position() - global_position
-			else:
-				dragging = false
+				used_targetless.emit()
+				owner.update_energy(-data.cost)
+				data.effect.call(owner)
+				
+
 
 func _process(_delta):
 	if dragging:
