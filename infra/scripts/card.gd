@@ -4,13 +4,15 @@ class_name BaseCard
 var dragging = false
 var drag_offset = Vector2.ZERO
 
-@export var title = "Card Title"
+var title = "loading"
+var body = "loading description..."
+var energy_cost = 2
 
-@export var body = "card body. 67 is so funny lmao"
-
-func _ready() -> void:
+func setup():
 	($CardTitle as RichTextLabel).text = title
 	($CardBody as RichTextLabel).text = body
+	$TextureRect/EnergyCost.text = str(energy_cost)
+	
 
 func _gui_input(event):
 	if event is InputEventMouseButton:

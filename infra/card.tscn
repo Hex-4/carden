@@ -1,6 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://cpy4rqdrobds0"]
+[gd_scene load_steps=6 format=3 uid="uid://cpy4rqdrobds0"]
 
 [ext_resource type="Script" uid="uid://c8e6tdvtnietq" path="res://infra/scripts/card.gd" id="1_dsegt"]
+[ext_resource type="FontFile" uid="uid://vn6bc7r65hl5" path="res://monogram-extended-italic.ttf" id="2_ss0m7"]
+[ext_resource type="FontFile" uid="uid://birqjwiwc2yjv" path="res://monogram-extended.ttf" id="3_enukl"]
+[ext_resource type="Texture2D" uid="uid://cb6o10lqbkm0u" path="res://art-sources/energy-pill.png" id="4_xj7o1"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nxf5b"]
 border_width_left = 1
@@ -17,7 +20,7 @@ shadow_size = 2
 shadow_offset = Vector2(-0.205, 3.66)
 
 [node name="Card" type="Control"]
-custom_minimum_size = Vector2(40, 60)
+custom_minimum_size = Vector2(80, 120)
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -44,35 +47,93 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_nxf5b")
 
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.053000003
+anchor_top = 0.81700003
+anchor_right = 0.26500002
+anchor_bottom = 0.96700007
+offset_left = -0.0050001144
+offset_top = -0.040000916
+offset_right = -0.025001526
+offset_bottom = -0.040008545
+metadata/_edit_use_anchors_ = true
+
 [node name="CardTitle" type="RichTextLabel" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.08800001
-anchor_top = 0.062000003
-anchor_right = 0.82500005
-anchor_bottom = 0.155
-offset_top = -1.0799999
-offset_bottom = 5.180002
+anchor_left = 0.052705918
+anchor_top = -0.008416672
+anchor_right = 1.9782059
+anchor_bottom = 0.18341666
+offset_left = 0.020001411
+offset_top = 0.010002315
+offset_right = -0.020004272
+offset_bottom = -0.0099983215
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 mouse_default_cursor_shape = 6
-text = "loading"
+theme_override_fonts/normal_font = ExtResource("2_ss0m7")
+theme_override_font_sizes/normal_font_size = 16
+text = "Card Title"
 fit_content = true
 scroll_active = false
+metadata/_edit_use_anchors_ = true
 
 [node name="CardBody" type="RichTextLabel" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.108
-anchor_top = 0.5
-anchor_right = 0.90000004
-anchor_bottom = 0.93200004
-offset_top = -0.99998474
+anchor_left = 0.052941177
+anchor_top = 0.09966667
+anchor_right = 1.0524414
+anchor_bottom = 0.7913334
+offset_top = 0.039996147
+offset_right = 0.039993286
+offset_bottom = 0.039993286
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 mouse_default_cursor_shape = 6
-text = "loading"
+theme_override_constants/line_separation = -3
+theme_override_fonts/normal_font = ExtResource("3_enukl")
+theme_override_font_sizes/normal_font_size = 16
+text = "This is a card that does something, I would hope. It would be awesome if it did. Yay!"
 fit_content = true
 scroll_active = false
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.55
+anchor_top = 0.83300006
+anchor_right = 0.95000005
+anchor_bottom = 0.96700007
+offset_top = 0.039993286
+offset_bottom = -0.040008545
+texture = ExtResource("4_xj7o1")
+metadata/_edit_use_anchors_ = true
+
+[node name="EnergyCost" type="RichTextLabel" parent="TextureRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.469
+anchor_top = 0.109000005
+anchor_right = 0.937
+anchor_bottom = 0.70500004
+offset_left = -0.008000374
+offset_top = -1.7440001
+offset_right = 0.016000748
+offset_bottom = 1.7199993
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+mouse_default_cursor_shape = 6
+theme_override_fonts/normal_font = ExtResource("2_ss0m7")
+theme_override_font_sizes/normal_font_size = 16
+text = "03"
+fit_content = true
+scroll_active = false
+metadata/_edit_use_anchors_ = true

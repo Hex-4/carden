@@ -1,7 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://dsciygv667edo"]
-
-[ext_resource type="PackedScene" uid="uid://cpy4rqdrobds0" path="res://infra/card.tscn" id="1_3ddji"]
-[ext_resource type="Script" uid="uid://duxiobpnd5p5u" path="res://cards/scripts/water.gd" id="2_aaucu"]
-
-[node name="WaterCard" instance=ExtResource("1_3ddji")]
-script = ExtResource("2_aaucu")
