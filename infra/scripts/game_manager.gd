@@ -3,21 +3,16 @@ class_name GameManager
 
 var base_card_scene: PackedScene = preload("res://infra/card.tscn")
 
-var corn_data = CardData.new()
-
 @onready var energy_label = %EnergyLevel
 
 var energy = 6
 
-func load_cards():
-	corn_data.card_name = "Plant Corn"
-	corn_data.description = "It's yellow! Takes 4 days to grow, sells for $6."
-	corn_data.cost = 1
+var corn_data = CardLib.corn_card()
 
+@onready var farm: Farm = $Screen/Farm
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	load_cards()
 	create_card(corn_data)
 	create_card(corn_data)
 	create_card(corn_data)

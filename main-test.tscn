@@ -1,9 +1,24 @@
-[gd_scene load_steps=5 format=3 uid="uid://btn12n75otxaf"]
+[gd_scene load_steps=9 format=3 uid="uid://btn12n75otxaf"]
 
 [ext_resource type="Texture2D" uid="uid://cb6o10lqbkm0u" path="res://art-sources/energy-pill.png" id="3_1kwsd"]
+[ext_resource type="Texture2D" uid="uid://c2smapoi7ts8o" path="res://art-sources/corn.png" id="3_g7jtv"]
 [ext_resource type="Script" uid="uid://cfjx3gq8snege" path="res://infra/scripts/game_manager.gd" id="4_1kwsd"]
 [ext_resource type="Texture2D" uid="uid://bupe615yjnvp7" path="res://art-sources/farm.png" id="4_g7jtv"]
 [ext_resource type="FontFile" uid="uid://vn6bc7r65hl5" path="res://monogram-extended-italic.ttf" id="4_k6y1p"]
+[ext_resource type="Script" uid="uid://mv8r7efth5py" path="res://infra/scripts/farm.gd" id="4_xgctr"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k6y1p"]
+resource_name = "corn"
+texture = ExtResource("3_g7jtv")
+texture_region_size = Vector2i(24, 24)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_xgctr"]
+tile_size = Vector2i(24, 24)
+sources/0 = SubResource("TileSetAtlasSource_k6y1p")
 
 [node name="GameManager" type="Node"]
 script = ExtResource("4_1kwsd")
@@ -31,13 +46,17 @@ grow_horizontal = 2
 grow_vertical = 0
 alignment = 1
 
-[node name="TileMapLayer" type="TileMapLayer" parent="Screen"]
+[node name="FarmBG" type="Sprite2D" parent="Screen"]
 position = Vector2(233, 63)
-metadata/_edit_group_ = true
-
-[node name="Sprite2D" type="Sprite2D" parent="Screen/TileMapLayer"]
 scale = Vector2(2, 2)
 texture = ExtResource("4_g7jtv")
+
+[node name="Farm" type="TileMapLayer" parent="Screen"]
+position = Vector2(137, 15)
+scale = Vector2(2, 2)
+tile_set = SubResource("TileSet_xgctr")
+script = ExtResource("4_xgctr")
+metadata/_edit_group_ = true
 
 [node name="TextureRect" type="TextureRect" parent="Screen"]
 layout_mode = 1
