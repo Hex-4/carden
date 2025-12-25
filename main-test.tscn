@@ -1,16 +1,20 @@
-[gd_scene load_steps=17 format=3 uid="uid://btn12n75otxaf"]
+[gd_scene load_steps=23 format=3 uid="uid://btn12n75otxaf"]
 
 [ext_resource type="Texture2D" uid="uid://cb6o10lqbkm0u" path="res://art-sources/energy-pill.png" id="3_1kwsd"]
 [ext_resource type="Texture2D" uid="uid://c2smapoi7ts8o" path="res://art-sources/corn.png" id="3_g7jtv"]
 [ext_resource type="Script" uid="uid://cfjx3gq8snege" path="res://infra/scripts/game_manager.gd" id="4_1kwsd"]
 [ext_resource type="Texture2D" uid="uid://bupe615yjnvp7" path="res://art-sources/farm.png" id="4_g7jtv"]
 [ext_resource type="FontFile" uid="uid://vn6bc7r65hl5" path="res://monogram-extended-italic.ttf" id="4_k6y1p"]
+[ext_resource type="Texture2D" uid="uid://bijfu53pf3eo2" path="res://art-sources/radish.png" id="4_xerpa"]
 [ext_resource type="Script" uid="uid://mv8r7efth5py" path="res://infra/scripts/farm.gd" id="4_xgctr"]
+[ext_resource type="Texture2D" uid="uid://bxlohqaebnhan" path="res://art-sources/wheat.png" id="5_wipo2"]
 [ext_resource type="Script" uid="uid://g6i4wt0oliwq" path="res://infra/hud.gd" id="5_xgctr"]
 [ext_resource type="Texture2D" uid="uid://qmkj1jklx1t1" path="res://art-sources/next-day-button.png" id="8_8hwim"]
 [ext_resource type="Texture2D" uid="uid://djrgpoburnjus" path="res://testcard.png" id="8_chv7t"]
 [ext_resource type="Texture2D" uid="uid://c2sb5ljkc5tv5" path="res://art-sources/days.png" id="8_dc63s"]
 [ext_resource type="Texture2D" uid="uid://dqdrssc5w8qs1" path="res://art-sources/cash.png" id="8_uj76s"]
+[ext_resource type="Script" uid="uid://ddn5dp5iq0pax" path="res://infra/OverPrompt.gd" id="14_sjj73"]
+[ext_resource type="FontFile" uid="uid://birqjwiwc2yjv" path="res://monogram-extended.ttf" id="15_o66n6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k6y1p"]
 resource_name = "corn"
@@ -21,9 +25,27 @@ texture_region_size = Vector2i(24, 24)
 2:0/0 = 0
 3:0/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wipo2"]
+texture = ExtResource("4_xerpa")
+texture_region_size = Vector2i(24, 24)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_uyli6"]
+texture = ExtResource("5_wipo2")
+texture_region_size = Vector2i(24, 24)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+
 [sub_resource type="TileSet" id="TileSet_xgctr"]
 tile_size = Vector2i(24, 24)
 sources/0 = SubResource("TileSetAtlasSource_k6y1p")
+sources/1 = SubResource("TileSetAtlasSource_wipo2")
+sources/2 = SubResource("TileSetAtlasSource_uyli6")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dc63s"]
 atlas = ExtResource("8_8hwim")
@@ -236,3 +258,69 @@ offset_right = 204.0
 offset_bottom = 466.0
 scale = Vector2(0.333, 0.333)
 texture = ExtResource("8_chv7t")
+
+[node name="Panel" type="Panel" parent="Screen"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("14_sjj73")
+
+[node name="Label" type="Label" parent="Screen/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+theme_override_fonts/font = ExtResource("4_k6y1p")
+theme_override_font_sizes/font_size = 32
+text = "you win!"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="Screen/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.25
+anchor_right = 1.0
+anchor_bottom = 0.79
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("15_o66n6")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="replay" type="Button" parent="Screen/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.045
+anchor_top = 0.74
+anchor_right = 0.465
+anchor_bottom = 0.95
+theme_override_fonts/font = ExtResource("15_o66n6")
+theme_override_font_sizes/font_size = 16
+text = "play again"
+metadata/_edit_use_anchors_ = true
+
+[node name="keep" type="Button" parent="Screen/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.495
+anchor_top = 0.74
+anchor_right = 0.915
+anchor_bottom = 0.95
+theme_override_fonts/font = ExtResource("15_o66n6")
+theme_override_font_sizes/font_size = 16
+text = "keep going"
+metadata/_edit_use_anchors_ = true
+
+[connection signal="pressed" from="Screen/Panel/replay" to="Screen/Panel" method="_on_replay_pressed"]
+[connection signal="pressed" from="Screen/Panel/keep" to="Screen/Panel" method="_on_keep_pressed"]

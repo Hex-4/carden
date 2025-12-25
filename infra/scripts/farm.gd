@@ -1,6 +1,8 @@
 extends TileMapLayer
 class_name Farm
 
+@onready var gm: GameManager = owner
+
 var tiles: Array[CropTile] = [
 	CropTile.new(),
 	CropTile.new(),
@@ -68,6 +70,34 @@ func plant_corn():
 	
 	set_cell(coords_to_tiles[empty_idx], 0, Vector2(0, 0))
 	
+func plant_radish():
+	var empty_idx = tiles.find_custom(is_crop_empty.bind())
+	var c: CropTile = tiles[empty_idx]
+	
+	c.crop_type = "radish"
+	c.is_empty = false
+	c.planted_by = CardLib.corn_card()
+	c.turns_remaining = 1
+	c.max_turns = 1
+	c.atlas_id = 1
+	c.sells_for = 3
+	
+	set_cell(coords_to_tiles[empty_idx], 1, Vector2(0, 0))
+
+func plant_wheat():
+	var empty_idx = tiles.find_custom(is_crop_empty.bind())
+	var c: CropTile = tiles[empty_idx]
+	
+	c.crop_type = "wheat"
+	c.is_empty = false
+	c.planted_by = CardLib.corn_card()
+	c.turns_remaining = 2
+	c.max_turns = 2
+	c.atlas_id = 2
+	c.sells_for = 7
+	
+	set_cell(coords_to_tiles[empty_idx], 2, Vector2(0, 0))
+	
 func update_board():
 	for tile_idx in tiles.size():
 		var tile = tiles[tile_idx]
@@ -87,5 +117,7 @@ func harvest() -> int:
 		if not tile.is_empty and tile.turns_remaining == 0:
 			cash_this_harvest += tile.sells_for
 			tile.reset()
+			if gm.market_count >= 0:
+				gm.market_count += 1
 			erase_cell(coords_to_tiles[tile_idx])
 	return cash_this_harvest
