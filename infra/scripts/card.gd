@@ -4,7 +4,7 @@ class_name BaseCard
 var dragging = false
 var drag_offset = Vector2.ZERO
 
-signal used_targetless
+signal used(me)
 var data: CardData
 @onready var gm: GameManager = get_owner()
 
@@ -19,10 +19,7 @@ func _gui_input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if event.pressed:
-				used_targetless.emit()
-				owner.update_energy(-data.cost)
-				data.effect.call(owner)
-				
+				used.emit(self)
 
 
 func _process(_delta):
