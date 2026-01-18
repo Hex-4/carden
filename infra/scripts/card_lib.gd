@@ -142,6 +142,9 @@ static func get_starter_deck() -> Array[CardData]:
 		
 		# Spicy decision cards
 		compost_card(),
+		compost_card(),
+		compost_card(),
+		compost_card(),
 		deep_water_card(),
 		bulk_plant_card(),
 		market_card(),

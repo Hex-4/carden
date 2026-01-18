@@ -3,6 +3,8 @@ class_name BaseCard
 
 var dragging = false
 var drag_offset = Vector2.ZERO
+enum CardState { SPAWNING, ACTIVE, REMOVING }
+var state: CardState = CardState.SPAWNING
 
 signal used(me)
 var data: CardData
@@ -37,3 +39,6 @@ func _on_mouse_exited() -> void:
 	var t = get_tree().create_tween()
 	
 	t.tween_property(self, "scale", Vector2(1, 1), 0.2).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	
+func transition_state(new_state: CardState):
+	state = new_state

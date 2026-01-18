@@ -5,7 +5,7 @@ var base_card_scene: PackedScene = preload("res://infra/card.tscn")
 
 @onready var hud: HUD = $Screen/HUD
 
-@onready var hand: Control = $Screen/Hand
+@onready var hand: Hand = $Screen/Hand
 
 @onready var sfx: SFX = $SFX
 
@@ -63,7 +63,7 @@ func reshuffle_discard() -> void:
 	discards.clear()
 	
 func draw() -> void:
-	var hand_size: int = hand.get_child_count()
+	var hand_size: int = hand.active_cards().size()
 	
 	
 	while hand_size < 4:
@@ -71,8 +71,14 @@ func draw() -> void:
 			reshuffle_discard()
 		if deck.is_empty():
 			break
+		sfx.play_card_take()
 		var c = deck.pop_back()
-		add_card_to_hand(c)
+		var result = hand.add_card_to_hand(c)
+		
+		await result[1].finished # get tween
+		
+		(result[0] as BaseCard).state = BaseCard.CardState.ACTIVE
+		
 		hand_size += 1
 	
 func update_energy(new: int):
@@ -89,15 +95,6 @@ func harvest():
 		sfx.play_win()
 		panel.win()
 
-func add_card_to_hand(data: CardData) -> BaseCard:
-	var new_card: BaseCard = base_card_scene.instantiate()
-	
-	
-	new_card.setup(data)
-	$Screen/Hand.add_child(new_card)
-	new_card.owner = self
-	new_card.used.connect(on_card_used)
-	return new_card
 	
 func on_card_used(card: BaseCard):
 	if energy >= card.data.cost and card.data.requirement.call(self):
@@ -105,14 +102,21 @@ func on_card_used(card: BaseCard):
 		sfx.play_card_use()
 		card.data.effect.call(self)
 		discards.append(card.data)
-		hand.remove_card_animated(card)
+		card.state = BaseCard.CardState.REMOVING
+		await hand.remove_card_animated(card)
 		cards_played_this_turn += 1
 		
 
 func compost():
-	for node in hand.get_children():
-		hand.remove_child(node)
-		node.queue_free()
+	print("STARTING COMPOST")
+	var to_remove := hand.active_cards()
+
+	for node: BaseCard in to_remove:
+		if not is_instance_valid(node):
+			continue
+		discards.append(node.data)
+		node.state = BaseCard.CardState.REMOVING
+		hand.remove_card_animated(node)
 	draw()
 
 func turn_end():
@@ -122,14 +126,16 @@ func turn_end():
 	farm.update_board()
 	var has_playable_card = false
 	sfx.play_next_day()
-	for card_visual in hand.get_children():
+	for card_visual in hand.active_cards():
 		if card_visual.data.requirement.call(self):
 			has_playable_card = true
 			break
 
-	if not has_playable_card and hand.get_child_count() > 0:
-		compost()
-	draw()
+	if not has_playable_card and hand.active_cards().size() >= 4:
+		await compost()
+	else:
+		await draw()
+
 	update_energy(3)
 	if coffee_energy > 0:
 		update_energy(energy + coffee_energy)
