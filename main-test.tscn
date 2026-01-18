@@ -1,5 +1,6 @@
-[gd_scene load_steps=23 format=3 uid="uid://btn12n75otxaf"]
+[gd_scene load_steps=25 format=3 uid="uid://btn12n75otxaf"]
 
+[ext_resource type="Script" uid="uid://bh2ke5jsbe34q" path="res://infra/scripts/hand.gd" id="2_7m4ec"]
 [ext_resource type="Texture2D" uid="uid://cb6o10lqbkm0u" path="res://art-sources/energy-pill.png" id="3_1kwsd"]
 [ext_resource type="Texture2D" uid="uid://c2smapoi7ts8o" path="res://art-sources/corn.png" id="3_g7jtv"]
 [ext_resource type="Script" uid="uid://cfjx3gq8snege" path="res://infra/scripts/game_manager.gd" id="4_1kwsd"]
@@ -15,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://dqdrssc5w8qs1" path="res://art-sources/cash.png" id="8_uj76s"]
 [ext_resource type="Script" uid="uid://ddn5dp5iq0pax" path="res://infra/OverPrompt.gd" id="14_sjj73"]
 [ext_resource type="FontFile" uid="uid://birqjwiwc2yjv" path="res://monogram-extended.ttf" id="15_o66n6"]
+[ext_resource type="Script" uid="uid://f7dk7rmgqx23" path="res://infra/scripts/sfx.gd" id="16_o66n6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k6y1p"]
 resource_name = "corn"
@@ -70,10 +72,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Hand" type="HBoxContainer" parent="Screen"]
+[node name="Hand" type="Control" parent="Screen"]
 custom_minimum_size = Vector2(0, 120)
 layout_mode = 1
-anchors_preset = -1
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -83,7 +84,7 @@ offset_right = -24.0
 offset_bottom = -16.0
 grow_horizontal = 2
 grow_vertical = 0
-alignment = 1
+script = ExtResource("2_7m4ec")
 
 [node name="FarmBG" type="Sprite2D" parent="Screen"]
 position = Vector2(233, 63)
@@ -321,6 +322,9 @@ theme_override_fonts/font = ExtResource("15_o66n6")
 theme_override_font_sizes/font_size = 16
 text = "keep going"
 metadata/_edit_use_anchors_ = true
+
+[node name="SFX" type="AudioStreamPlayer" parent="."]
+script = ExtResource("16_o66n6")
 
 [connection signal="pressed" from="Screen/Panel/replay" to="Screen/Panel" method="_on_replay_pressed"]
 [connection signal="pressed" from="Screen/Panel/keep" to="Screen/Panel" method="_on_keep_pressed"]
