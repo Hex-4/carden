@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://btn12n75otxaf"]
+[gd_scene load_steps=26 format=3 uid="uid://btn12n75otxaf"]
 
 [ext_resource type="Script" uid="uid://bh2ke5jsbe34q" path="res://infra/scripts/hand.gd" id="2_7m4ec"]
 [ext_resource type="Texture2D" uid="uid://cb6o10lqbkm0u" path="res://art-sources/energy-pill.png" id="3_1kwsd"]
@@ -17,6 +17,7 @@
 [ext_resource type="Script" uid="uid://ddn5dp5iq0pax" path="res://infra/OverPrompt.gd" id="14_sjj73"]
 [ext_resource type="FontFile" uid="uid://birqjwiwc2yjv" path="res://monogram-extended.ttf" id="15_o66n6"]
 [ext_resource type="Script" uid="uid://f7dk7rmgqx23" path="res://infra/scripts/sfx.gd" id="16_o66n6"]
+[ext_resource type="AudioStream" uid="uid://bq82thq3yurgo" path="res://audio/4_working_time_master.ogg" id="18_4thyh"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k6y1p"]
 resource_name = "corn"
@@ -75,6 +76,7 @@ grow_vertical = 2
 [node name="Hand" type="Control" parent="Screen"]
 custom_minimum_size = Vector2(0, 120)
 layout_mode = 1
+anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -260,6 +262,51 @@ offset_bottom = 466.0
 scale = Vector2(0.333, 0.333)
 texture = ExtResource("8_chv7t")
 
+[node name="LOLPanel" type="Panel" parent="Screen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -136.0
+offset_top = 30.0
+offset_right = 177.0
+offset_bottom = 88.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("14_sjj73")
+metadata/_edit_group_ = true
+
+[node name="Label" type="Label" parent="Screen/LOLPanel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 6.0
+offset_bottom = 32.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("4_k6y1p")
+theme_override_font_sizes/font_size = 32
+text = "no playable cards"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="Screen/LOLPanel"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -24.0
+offset_bottom = -11.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("15_o66n6")
+text = "go to sleep to fully re-draw hand"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
 [node name="Panel" type="Panel" parent="Screen"]
 custom_minimum_size = Vector2(200, 100)
 layout_mode = 1
@@ -325,6 +372,12 @@ metadata/_edit_use_anchors_ = true
 
 [node name="SFX" type="AudioStreamPlayer" parent="."]
 script = ExtResource("16_o66n6")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("18_4thyh")
+volume_db = -8.089
+autoplay = true
+parameters/looping = true
 
 [connection signal="pressed" from="Screen/Panel/replay" to="Screen/Panel" method="_on_replay_pressed"]
 [connection signal="pressed" from="Screen/Panel/keep" to="Screen/Panel" method="_on_keep_pressed"]

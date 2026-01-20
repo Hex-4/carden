@@ -80,6 +80,23 @@ func draw() -> void:
 		(result[0] as BaseCard).state = BaseCard.CardState.ACTIVE
 		
 		hand_size += 1
+		
+	var has_new_playable_card = false
+		
+	for card_visual in hand.active_cards():
+		if card_visual.data.requirement.call(self):
+			has_new_playable_card = true
+			break
+			
+	if not has_new_playable_card and hand.active_cards().size() >= 4:
+		$Screen/LOLPanel/Label2.text = "go to sleep to fully re-draw hand"
+		$Screen/LOLPanel.reveal()
+	elif not has_new_playable_card:
+		
+		$Screen/LOLPanel/Label2.text = "go to sleep to draw more cards"
+		$Screen/LOLPanel.reveal()
+	else:
+		$Screen/LOLPanel.disappear()
 	
 func update_energy(new: int):
 	energy = new
@@ -106,6 +123,19 @@ func on_card_used(card: BaseCard):
 		await hand.remove_card_animated(card)
 		cards_played_this_turn += 1
 		
+		var has_new_playable_card = false
+			
+		for card_visual in hand.active_cards():
+			if card_visual.data.requirement.call(self):
+				has_new_playable_card = true
+				break
+				
+		if not has_new_playable_card and hand.active_cards().size() > 0:
+			$Screen/LOLPanel/Label2.text = "go to sleep to draw more cards"
+			$Screen/LOLPanel.reveal()
+		else:
+			$Screen/LOLPanel.disappear()
+			
 
 func compost():
 	print("STARTING COMPOST")
@@ -135,6 +165,8 @@ func turn_end():
 		await compost()
 	else:
 		await draw()
+		
+
 
 	update_energy(3)
 	if coffee_energy > 0:

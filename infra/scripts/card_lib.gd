@@ -44,7 +44,7 @@ static func water_card():
 	card.description = "Water everything! Advances all crops by an extra day."
 	card.needs_target = CardData.TargetType.NONE
 	card.requirement = func(gm: GameManager):
-		return gm.farm.has_crops()
+		return gm.farm.has_growing_crops()
 	card.effect = func(gm: GameManager):
 		gm.farm.update_board()
 	return card
@@ -78,7 +78,7 @@ static func deep_water_card():
 	card.description = "That's a lot of water! Advance all crops by 2 turns."
 	card.needs_target = CardData.TargetType.NONE
 	card.requirement = func(gm: GameManager):
-		return gm.farm.has_crops()
+		return gm.farm.has_growing_crops()
 	card.effect = func(gm: GameManager):
 		gm.farm.update_board()
 		gm.farm.update_board()
@@ -103,6 +103,8 @@ static func market_card():
 	card.cost = 0
 	card.description = "If 3+ crops are sold on this turn (after this card is played), get an extra $10."
 	card.needs_target = CardData.TargetType.NONE
+	card.requirement = func(gm: GameManager):
+		return gm.farm.has_mature_crops()
 	card.effect = func(gm: GameManager):
 		gm.market_count = 0
 	return card
@@ -139,11 +141,49 @@ static func get_starter_deck() -> Array[CardData]:
 		harvest_card(),
 		harvest_card(),
 		harvest_card(),
+		harvest_card(),
+		harvest_card(),
+		harvest_card(),
+		harvest_card(),
+		harvest_card(),
+		harvest_card(),
+		harvest_card(),
+		harvest_card(),
+		harvest_card(),
+		harvest_card(),
+		harvest_card(),
+		harvest_card(),
+		harvest_card(),
+		harvest_card(),
+		harvest_card(),
+		harvest_card(),
+		harvest_card(),
+		harvest_card(),
+		harvest_card(),
+		harvest_card(),
+		harvest_card(),
+		harvest_card(),
+		harvest_card(),
+		harvest_card(),
+		harvest_card(),
+		harvest_card(),
+		harvest_card(),
+		harvest_card(),
+		harvest_card(),
+		harvest_card(),
+		harvest_card(),
+		harvest_card(),
+		harvest_card(),
+		harvest_card(),
+		harvest_card(),
+		harvest_card(),
+		harvest_card(),
+		harvest_card(),
+		harvest_card(),
+		harvest_card(),
+
 		
 		# Spicy decision cards
-		compost_card(),
-		compost_card(),
-		compost_card(),
 		compost_card(),
 		deep_water_card(),
 		bulk_plant_card(),

@@ -50,6 +50,11 @@ func has_mature_crops() -> bool:
 		return (!crop.is_empty) and crop.turns_remaining == 0
 	return tiles.any(is_crop_mature.bind())
 	
+func has_growing_crops() -> bool:
+	var is_crop_growing = func(crop: CropTile):
+		return (!crop.is_empty) and crop.turns_remaining != 0
+	return tiles.any(is_crop_growing.bind())
+	
 func get_growth_stage(turns_remaining: int, max_turns: int) -> int:
 	if turns_remaining == 0:
 		return 3
